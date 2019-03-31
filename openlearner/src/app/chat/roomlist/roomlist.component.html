@@ -1,0 +1,15 @@
+<form class="search-form">
+  <mat-form-field>
+    <input type="text" matInput [formControl]="searchInputControl" autocomplete="off">
+  </mat-form-field>
+  <mat-icon>search</mat-icon>
+</form>
+<mat-card *ngFor="let room of roomSearchResults | async" 
+  [style.backgroundColor]="'yellow'" [routerLink] = "[room.id]">
+  <mat-card-title>
+    {{ room.title }} {{ room.id }}
+  </mat-card-title>
+  <mat-card-content>
+      {{ room.summary }}
+  </mat-card-content>
+</mat-card>
