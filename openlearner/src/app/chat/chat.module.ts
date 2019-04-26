@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RoomComponent } from './room/room.component';
 import { RoomlistComponent } from './roomlist/roomlist.component';
-import { ChatService } from '../services/chat.service';
-import { RoomService } from '../services/room.service';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SharedMaterialModule} from '../material-modules'
@@ -26,10 +24,6 @@ const chatRoutes: Routes = [
     ReactiveFormsModule,
     FormsModule,
     RouterModule.forChild(chatRoutes),
-  ],
-  providers: [
-    ChatService,
-    RoomService
   ]
 })
 export class ChatModule { }

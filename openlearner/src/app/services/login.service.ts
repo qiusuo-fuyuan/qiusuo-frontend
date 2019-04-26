@@ -1,42 +1,31 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { User } from '../models/user';
-import { GoogleSiginProvider } from './authentication/providers/google-signin.provider';
-import { FacebookSiginProvider } from './authentication/providers/facebook-sigin.provider';
-import { WechatSiginProvider } from './authentication/providers/wechat-sigin.provider';
+
+
+import { AuthModule, AuthServiceConfig, AuthService } from "../features/authentication";
+import { GoogleLoginProvider} from "../features/authentication";
+import { AppConfigService } from '../config';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class LoginService implements OnInit{
   currentUser: User
+  availableLoginProviders: string[];
 
-  constructor(private googleSiginProvider: GoogleSiginProvider,
-    private facebookSiginProvider: FacebookSiginProvider,
-    private wechatSiginProvider: WechatSiginProvider) { }
+  constructor(private appConfigService:AppConfigService,
+    private authService:AuthService) { }
+
+  ngOnInit() {
+      this.availableLoginProviders = Array.from(this.appConfigService.getAuthConfig().providers.keys())
+      this.availableLoginProviders.push("default");
+  }
 
   isAnonymous():boolean {
     if(this.currentUser==null) {
       return true;
     }
     return false;
-  }
-
-  login(provider: string) {
-    if(provider === "facebook") {
-
-    }
-
-    if(provider === "google") {
-      this.googleSiginProvider.login().then(result => {
-        this.currentUser = result;
-      })
-    }
-
-    if(provider === "wechat") {
-
-    }
-
-    if(provider === "default") {
-    }
   }
 }

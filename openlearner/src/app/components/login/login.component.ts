@@ -7,10 +7,14 @@ import { Router, ActivatedRoute } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
+
+
 export class LoginComponent implements OnInit {
   username: string;
   password: string;
   returnUrl: string;
+
   constructor(private loginService: LoginService,
     private router: Router,
     private route: ActivatedRoute) { }
@@ -21,8 +25,8 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  socialLogin(socialPlatform: string) {
-    this.loginService.login(socialPlatform);
+  login(loginPlatform: string) {
+    this.loginService.login(loginPlatform);
     this.go();
   }
 

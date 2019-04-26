@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http'
 import { AppComponent } from './app.component';
 
 import { LoginComponent } from './components/login/login.component';
-import { Routes, RouterModule } from '@angular/router';
 import { ChatModule } from './chat/chat.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedMaterialModule} from './material-modules';
@@ -14,14 +13,9 @@ import { RewardedquestionsComponent } from './components/rewardedquestions/rewar
 import { ConversationsComponent } from './components/conversations/conversations.component';
 import { BroadcastingsComponent } from './components/broadcastings/broadcastings.component';
 import { FormsModule } from '@angular/forms';
-import { GoogleSiginProvider } from './services/authentication/providers/google-signin.provider';
-import { FacebookSiginProvider } from './services/authentication/providers/facebook-sigin.provider';
-import { WechatSiginProvider } from './services/authentication/providers/wechat-sigin.provider';
-
-const appRoutes: Routes = [
-  { path: 'login',component: LoginComponent},
-  { path:'', redirectTo:'/rooms',pathMatch:'full'},
-]
+import { AuthModule } from './features/authentication';
+import { AppRoutingModule } from './app-routing.module';
+import { AppConfigModule } from './config';
 
 @NgModule({
   declarations: [
@@ -39,11 +33,12 @@ const appRoutes: Routes = [
     SharedMaterialModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes),
-    ChatModule
+    AppConfigModule,
+    AuthModule,
+    ChatModule,
+    AppRoutingModule,
   ],
-  providers: [GoogleSiginProvider],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 
 

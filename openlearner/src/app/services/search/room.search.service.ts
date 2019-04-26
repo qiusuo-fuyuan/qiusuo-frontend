@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { RestService } from './rest.service';
-import { Room } from '../models/room';
+import { RestService } from '../rest.service';
+import { Room } from '../../models/room';
 import { Observable } from 'rxjs';
-import { identifierModuleUrl } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RoomService extends RestService {
+export class RoomSearchService extends RestService {
 
   getRoom(id: string): Observable<Room> {
     let requestPath = '/room/'+id;
