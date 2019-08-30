@@ -14,15 +14,18 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
   returnUrl: string;
+  socialLoginProviders: string[]
 
   constructor(private loginService: LoginService,
     private router: Router,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.loginService
     this.route.queryParams.subscribe((params: Query) => {
       this.returnUrl = params['returnUrl']; 
-    })
+    });
+    this.socialLoginProviders = this.loginService.availableLoginProviders;
   }
 
   login(loginPlatform: string) {
