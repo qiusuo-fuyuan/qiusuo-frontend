@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "esModuleInterop": true,
+      "module": "commonjs",
+      "jsx": "react",
+      "lib": ["es2017", "dom", "esnext"],
+      "sourceMap": true,
+      "target": "es5",
+      "noUnusedLocals": true
+    },
+    "exclude": ["node_modules"]
+  }
+  
