@@ -1,31 +1,24 @@
-module.exports = {
-    mode: "development",
+const path = require('path');
+const merge = require('webpack-merge');
 
-    // Enable sourcemaps for debugging webpack's output.
-    devtool: "source-map",
+const baseConfig = require('./config/webpack/config.base');
+const devConfig = require('./config/webpack/config.dev');
+const prodConfig = require('./config/webpack/config.prod');
+const dotenv = require('dotenv');
 
-    resolve: {
-        // Add '.ts' and '.tsx' as resolvable extensions.
-        extensions: [".ts", ".tsx",".js"]
-    },
+const sourceDir = path.join(__dirname, './src');
+const distDir = path.join(__dirname, './dist');
 
-    module: {
-        rules: [
-            {
-                test: /\.ts(x?)$/,
-                exclude: /node_modules/,
-                use: [
-                    {
-                        loader: "ts-loader"
-                    }
-                ]
-            },
-            // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-            {
-                enforce: "pre",
-                test: /\.js$/,
-                loader: "source-map-loader"
-            }
-        ]
-    }
+module.exports = (env, argv) => {
+  const devMode = argv.mode !== 'production';
+
+  let envFile = devMode ? '.env.dev' : '.env.prod';
+  envFile = path.join(__dirname) + '/' + envFile;
+  const paths = { sourceDir, distDir, envFile };
+
+  const base = baseConfig(paths);
+  const dev = merge(base, devConfig(paths));
+  const prod = merge(base, prodConfig(paths));
+
+  return devMode ? dev : prod;
 };
