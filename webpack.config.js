@@ -13,6 +13,7 @@ module.exports = (env, argv) => {
   const devMode = argv.mode !== 'production';
 
   let envFile = devMode ? '.env.dev' : '.env.prod';
+  console.log("in file");
   envFile = path.join(__dirname) + '/' + envFile;
   const paths = { sourceDir, distDir, envFile };
 
