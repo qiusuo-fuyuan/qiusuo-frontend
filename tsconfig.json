@@ -11,7 +11,7 @@
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "AppComponents": ["./src/components"],
+      "AppComponents/*": ["./src/components/*"],
       "Assets": ["./src/assets"],
       "Generated/*": ["./src/__generated/*"]
     }
