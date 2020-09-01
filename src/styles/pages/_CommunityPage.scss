@@ -1,0 +1,54 @@
+.page_community {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+
+  >.panel_left_community {
+    display: flex;
+    flex-direction: column;
+
+    .communitylist {
+      flex-grow: 1;
+      color:white;
+      background-color:black;
+    }
+ }
+
+ >.panel_left_channel {
+   display: flex;
+   flex-direction: column;
+   background-color:blue;
+
+   .channellist {
+    flex-grow: 1;
+   }
+ }
+
+ >.panel_right {
+    display: flex;
+    flex-direction: column;
+
+   > .panel_right_header {
+     display: flex;
+     flex-direction: row;
+    }
+
+    > .panel_right_content {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+
+    > .chatboard {
+      background-color:yellow;
+      flex-grow: 1;
+      height: 100%;
+    }
+ 
+    > .userlist {
+      width: 20vw;
+      background-color:green;
+    }
+   }
+  }
+}
+

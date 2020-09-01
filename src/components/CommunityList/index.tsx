@@ -7,7 +7,7 @@ communities
 */
 export const CommunityList = () => {
   return (
-    <div>
+    <div className="communitylist">
       Subscription List
     </div>
   );
