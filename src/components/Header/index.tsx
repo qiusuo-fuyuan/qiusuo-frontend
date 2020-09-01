@@ -18,7 +18,8 @@ export const  Header:React.FC = () => {
         <Link to="login">注册登陆</Link>
       </li>
       <li>
-        <span><img alt="avatar" className="avartar-user" src={user.userDetails.avatarUrl} /></span>
+        {!user ? '':
+        <span><img alt="avatar" className="avartar-user" src={user.userDetails.avatarUrl} /></span>}
       </li>
     </ul>
   );
