@@ -1,3 +1,4 @@
+import { Footer } from 'AppComponents/Footer';
 import { Header } from 'AppComponents/Header';
 import { LoginForm } from 'AppComponents/LoginForm';
 import desktop from 'Assets/desktop.png';
@@ -14,6 +15,7 @@ export const HomePage:React.FC = () => {
         </div>
         <LoginForm />
       </div>
+      <Footer />
     </>
   );
 };

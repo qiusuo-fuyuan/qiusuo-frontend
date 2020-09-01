@@ -3,7 +3,6 @@ import { authLink } from '@sdk/auth';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloClient } from 'apollo-client';
 import { createHttpLink } from 'apollo-link-http';
-import { Footer } from 'AppComponents/Footer';
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.scss';
@@ -42,7 +41,6 @@ function App() {
             <CommunityPage />
           </Route>
         </Switch>
-        <Footer />
       </ApolloProvider>
     </Router>
   );
