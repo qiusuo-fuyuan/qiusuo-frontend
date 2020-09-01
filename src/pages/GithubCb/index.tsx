@@ -46,7 +46,7 @@ export const GithubCb = () => {
   }, [githubAuthorizationCode.current]);
   
   if (user) {
-    return <Redirect to="/" />;
+    return <Redirect to="/me" />;
   }
 
   return (

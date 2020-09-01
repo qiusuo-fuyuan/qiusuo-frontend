@@ -4,15 +4,13 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloClient } from 'apollo-client';
 import { createHttpLink } from 'apollo-link-http';
 import { Footer } from 'AppComponents/Footer';
-import { Header } from 'AppComponents/Header';
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.scss';
 import { apiUrl } from './constants';
+import { CommunityPage } from './pages/Community';
 import { GithubCb } from './pages/GithubCb';
 import { HomePage } from './pages/Home';
-import { LoginPage } from './pages/Login';
-
 
 
 const httpLink = createHttpLink({
@@ -33,16 +31,15 @@ function App() {
   return (
     <Router>
       <ApolloProvider client={client}>
-        <Header />
         <Switch>
           <Route exact path="/">
             <HomePage />
           </Route>
-          <Route path="/login">
-            <LoginPage />
-          </Route>
           <Route path="/ghcb">
             <GithubCb />
+          </Route>
+          <Route path="/me/">
+            <CommunityPage />
           </Route>
         </Switch>
         <Footer />
