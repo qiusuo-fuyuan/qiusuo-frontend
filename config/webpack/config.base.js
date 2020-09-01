@@ -13,6 +13,8 @@ module.exports = ({ sourceDir, distDir, envFile }) => {
     return prev;
   }, {});
 
+  console.log('environment is ', envKeys);
+
   return {
     entry: `${sourceDir}/index`,
     devtool: 'eval-source-map',
