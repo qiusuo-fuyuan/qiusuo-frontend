@@ -8,9 +8,14 @@ export const CommunityPage = () => {
 
   return (
     <>
-      <a href="/">
-        <img className="logo" src={logo} alt="logo" />
-      </a>
+      <div className="panel_left">
+        <a href="/">
+          <img className="logo" src={logo} alt="logo" />
+        </a>
+        <button>添加订阅</button>
+        <CommunityList />
+      </div>
+
       <li>
         {!user ? '':
         <span><img alt="avatar" className="avartar-user" src={user.userDetails.avatarUrl} /></span>}
