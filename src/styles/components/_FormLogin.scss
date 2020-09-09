@@ -4,11 +4,39 @@
 
 
 
-  .form__input-name {
+  .form__input-phone {
     display: block;
+
+    input {
+      border: none;
+      border-bottom: 1px solid #000000;
+      background-color: #eee;
+
+      &:focus {
+        outline: none;
+      }
+    }
   }
 
-  .form__input-pwd {
+  .form__input-code {
     display: block;
+
+    input {
+      border: none;
+      border-bottom: 1px solid #000000;
+      background-color: #eee;
+
+      &:focus {
+        outline: none;
+      }
+    }
   }
+
+  .github__button {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    outline:none;
+  }
+
 }

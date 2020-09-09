@@ -1,4 +1,4 @@
-import { getAuthToken } from '@sdk/auth';
+import { getAuthToken } from '@sdk/api/auth';
 import React from 'react';
 
 export const useAuth = (

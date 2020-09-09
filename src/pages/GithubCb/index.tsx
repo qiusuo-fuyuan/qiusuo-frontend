@@ -1,5 +1,5 @@
-import { useSignIn } from '@sdk/mutations';
-import { useUserDetails } from '@sdk/queries';
+import { useSignIn } from '@sdk/api/mutations';
+import { useUserDetails } from '@sdk/api/queries';
 import github from '@sdk/sociallogin/github';
 import { getQueryStringValue } from '@sdk/sociallogin/utils';
 import Loader from 'AppComponents/Loader';

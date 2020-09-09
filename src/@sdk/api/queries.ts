@@ -5,7 +5,7 @@ import { isEqual } from 'apollo-utilities/lib/util/isEqual';
 import { UserDetails } from 'Generated/UserDetails';
 import gql from 'graphql-tag';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useAuth } from './helpers/helper';
+import { useAuth } from './helper';
 
 export function useUserDetails(): {data: UserDetails, error:any, loading: boolean} {
   const client = useApolloClient();
@@ -38,7 +38,8 @@ export function useUserDetails(): {data: UserDetails, error:any, loading: boolea
   }, []);
 
   /*
-  memo in react will get called first.
+  memo in react will get called first before Fiber Commit, later
+  it will get called 
   */
   const { unsubscribe } = useMemo(() => {
     if(authenticated) {
@@ -47,10 +48,14 @@ export function useUserDetails(): {data: UserDetails, error:any, loading: boolea
       { [key: string]: any }
     > = client.watchQuery({ query: getUserDetails });
       const subscription = observable.subscribe(
-        (queryResult: ApolloQueryResult<any>) => {
+        (queryResult: ApolloQueryResult<UserDetails>) => {
           const { data, errors: apolloErrors } = queryResult;
           if (apolloErrors) {
             setData(null);
+            /* How to handle errors for graphql. In frontend, the display depends on the
+            data sent back from the server. If there is no data from the server, then
+            error should be shown in the frontend.
+            */
           } else {
             setData({ data, loading: false, error: null });
           }

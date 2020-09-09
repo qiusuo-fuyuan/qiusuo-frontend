@@ -1,4 +1,4 @@
-import { useUserDetails } from '@sdk/queries';
+import { useUserDetails } from '@sdk/api/queries';
 import { AdsBar } from 'AppComponents/AdsBar';
 import { ChannelList } from 'AppComponents/ChannelList';
 import { ChatBoard } from 'AppComponents/ChatBoard';

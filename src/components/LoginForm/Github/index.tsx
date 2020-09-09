@@ -27,7 +27,6 @@ const GithubButton: React.FC<SocialLoginProps> = (props) => {
         alt="github icon"
         className="github__button__icon"
       />
-      Sign In With Github
     </button>
   );
 };
