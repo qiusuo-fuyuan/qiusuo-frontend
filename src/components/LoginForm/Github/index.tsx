@@ -21,11 +21,11 @@ const GithubButton: React.FC<SocialLoginProps> = (props) => {
   };
   
   return (
-    <button className="github__button" type="button" onClick={onClickHandler}>
+    <button className="button--wechat" type="button" onClick={onClickHandler}>
       <img
         src={GithubIcon}
-        alt="github icon"
-        className="github__button__icon"
+        alt="icon github"
+        className="icon--github"
       />
     </button>
   );

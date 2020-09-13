@@ -1,10 +1,10 @@
-.form-login {
+.form--login {
   padding-top: 10rem;
   padding-left: 6rem;
 
 
 
-  .form__input-phone {
+  .form__label--phone {
     display: block;
 
     input {
@@ -18,7 +18,7 @@
     }
   }
 
-  .form__input-code {
+  .form__label--code {
     display: block;
 
     input {
@@ -32,11 +32,22 @@
     }
   }
 
-  .github__button {
+  .button--github {
     background-color: Transparent;
     background-repeat:no-repeat;
     border: none;
     outline:none;
+  }
+
+  .button--wechat {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    outline:none;
+
+    >img {
+      width: 32px;
+    }
   }
 
 }
