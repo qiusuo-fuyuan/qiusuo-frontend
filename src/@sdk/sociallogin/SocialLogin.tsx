@@ -13,7 +13,7 @@ export interface SocialLoginProps {
   onLoginSuccess: () => {};
   onLogoutFailure: () => {};
   onLogoutSuccess: () => {};
-  provider: 'github' | 'google';
+  provider: 'github' | 'google' | 'wechat' | 'linkedin' | 'gitee';
   redirect: string;
   scope: string;
 }
