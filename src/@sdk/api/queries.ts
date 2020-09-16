@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/indent */
-import { useApolloClient } from '@apollo/react-hooks';
-import { ApolloQueryResult, ObservableQuery } from 'apollo-client';
-import { isEqual } from 'apollo-utilities/lib/util/isEqual';
+import { ApolloQueryResult, ObservableQuery, useApolloClient } from '@apollo/client';
 import { UserDetails } from 'Generated/UserDetails';
 import gql from 'graphql-tag';
+import { isEqual } from 'lodash';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useAuth } from './helper';
 

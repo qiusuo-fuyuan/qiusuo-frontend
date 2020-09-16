@@ -57,6 +57,7 @@ module.exports = ({ sourceDir, distDir, envFile }) => {
           enforce: 'pre',
           test: /\.js$/,
           loader: 'source-map-loader',
+          exclude: ['/node_modules/'],
         },
       ],
     },
