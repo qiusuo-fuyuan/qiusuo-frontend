@@ -1,34 +1,23 @@
-.form--community {
+.community-form {
+  height: 100%;
 
-  /*
-  .form__label--name {
-    display: inline-block;
-    width: 60px;
-  }
-
-  .form__label--description {
-    display: inline-block;
-    vertical-align: top;
-  }
-
-  .form__label--tags {
-    display: block;
-  }
-  */
   label {
-    width:180px;
+    width:25%;
     clear:left;
     text-align:right;
     padding-right:10px;
-}
-
-  input, label {
-      float:left;
+    margin-bottom: 10px;
   }
 
-  button {
+  input, label {
+    float:left;
+    margin-bottom: 10px;
+  }
+
+  .community-form__submit  {
     display: block;
     clear:left;
-    margin: auto;
+    margin-left: 45%;
+    background-color: #4287f5;
   }
 }

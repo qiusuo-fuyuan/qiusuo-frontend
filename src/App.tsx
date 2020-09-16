@@ -1,8 +1,5 @@
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
 import { authLink } from '@sdk/api/auth';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { ApolloClient } from 'apollo-client';
-import { createHttpLink } from 'apollo-link-http';
 import { OverlayProvider } from 'AppComponents/Overlay';
 import { OverlayManager } from 'AppComponents/OverlayManager';
 import React from 'react';
@@ -22,10 +19,6 @@ const cache = new InMemoryCache();
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache,
-});
-
-cache.writeData({
-  data: {},
 });
 
 function App() {

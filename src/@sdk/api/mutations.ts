@@ -1,4 +1,4 @@
-import { useApolloClient } from '@apollo/react-hooks';
+import { useApolloClient } from '@apollo/client';
 import { TokenAuth, TokenAuthVariables } from 'Generated/TokenAuth';
 import gql from 'graphql-tag';
 import { useCallback } from 'react';

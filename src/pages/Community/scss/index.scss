@@ -1,39 +1,43 @@
-.page_community {
+.community-page {
   display: flex;
   flex-direction: row;
   height: 100%;
 
-  >.panel_left_community {
+  >.community-page__communities {
     display: flex;
     flex-direction: column;
+
+    .community-page__create-community__btn {
+      background-color: #5BB3AA;
+    }
 
     .communitylist {
       flex-grow: 1;
       color:white;
-      background-color:black;
+      background-color:#ceccea;
     }
  }
 
- >.panel_left_channel {
+ >.community-page_channels {
    display: flex;
    flex-direction: column;
-   background-color:blue;
+   background-color: #5BB3AA;
 
    .channellist {
     flex-grow: 1;
    }
  }
 
- >.panel_right {
+ >.community-page__right {
     display: flex;
     flex-direction: column;
 
-   > .panel_right_header {
+   > .community-page__right--header {
      display: flex;
      flex-direction: row;
     }
 
-    > .panel_right_content {
+    > .community-page__right--content {
     display: flex;
     flex-direction: row;
     flex-grow: 1;

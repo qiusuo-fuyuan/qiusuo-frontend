@@ -16,13 +16,13 @@ export const CommunityPage = () => {
   return (
     <OverlayContext.Consumer>
       { overlayContext => (
-        <div className="page_community">
-          <div className="panel_left_community">
+        <div className="community-page">
+          <div className="community-page__communities">
             <a href="/">
               <img className="logo" src={logo} alt="logo" />
             </a>
             <button
-              className="panel_community_add_btn"
+              className="community-page__create-community__btn"
               onClick={() =>
                 overlayContext.show(
                   OverlayType.community,
@@ -33,21 +33,21 @@ export const CommunityPage = () => {
             <CommunityList />
           </div>
  
-          <div className="panel_left_channel">
-            <button className="panel_channel__button">添加频道
+          <div className="community-page_channels">
+            <button className="community-page__create-channel__btn">添加频道
             </button>
             <ChannelList />
           </div>
  
-          <div className="panel_right">
-            <div className="panel_right_header">
+          <div className="community-page__right">
+            <div className="community-page__right--header">
               <AdsBar />
               <li>
                 {!user ? '':
                 <span><img alt="avatar" className="avartar-user" src={user.userDetails.avatarUrl} /></span>}
               </li>
             </div>
-            <div className="panel_right_content">
+            <div className="community-page__right--content">
               <ChatBoard />
               <UserList />
             </div>
