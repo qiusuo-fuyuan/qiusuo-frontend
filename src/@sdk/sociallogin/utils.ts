@@ -1,4 +1,5 @@
 import { RSLError } from './types';
+
 let urlParser: any;
 
 if (typeof window !== 'undefined') {
@@ -35,7 +36,7 @@ export const parseAsURL = (text: string) => {
     search: urlParser.search,
     hash: urlParser.hash,
     host: urlParser.host,
-    toString: function () {
+    toString() {
       return `${this.protocol}//${this.host}${
         this.pathname === '/' ? '' : this.pathname
       }${this.search}${this.hash}`;
@@ -52,9 +53,9 @@ export const getQueryStringValue = (key: string) => {
   return decodeURIComponent(
     window.location.search.replace(
       new RegExp(
-        '^(?:.*[&\\?]' +
-          encodeURIComponent(key).replace(/[.+*]/g, '\\$&') +
-          '(?:\\=([^&]*))?)?.*$',
+        `^(?:.*[&\\?]${ 
+          encodeURIComponent(key).replace(/[.+*]/g, '\\$&') 
+          }(?:\\=([^&]*))?)?.*$`,
         'i'
       ),
       '$1'
@@ -91,9 +92,9 @@ export const cleanLocation = () => {
 
     if (i === 0 && del) {
       return '?';
-    } else if (i === 0) {
+    } if (i === 0) {
       return keyval;
-    } else if (del) {
+    } if (del) {
       return acc;
     }
 
@@ -110,8 +111,6 @@ export const cleanLocation = () => {
     '',
     `${protocol}//${host}${pathname}${cleanedSearch}${cleanedHash}`
   );
-
-  return true;
 };
 
 export const rslError = (errorObject: RSLError) => {

@@ -1,8 +1,8 @@
 import { useApolloClient } from '@apollo/client';
-import { TokenAuth, TokenAuthVariables } from 'Generated/TokenAuth';
 import gql from 'graphql-tag';
 import { useCallback } from 'react';
 import { setAuthToken } from './auth';
+import { TokenAuth, TokenAuthVariables } from './gqlTypes/TokenAuth';
 
 
 

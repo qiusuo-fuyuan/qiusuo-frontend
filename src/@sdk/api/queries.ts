@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/indent */
 import { ApolloQueryResult, ObservableQuery, useApolloClient } from '@apollo/client';
-import { UserDetails } from 'Generated/UserDetails';
 import gql from 'graphql-tag';
 import { isEqual } from 'lodash';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { UserDetails } from './gqlTypes/UserDetails';
 import { useAuth } from './helper';
 
 export function useUserDetails(): {data: UserDetails, error:any, loading: boolean} {

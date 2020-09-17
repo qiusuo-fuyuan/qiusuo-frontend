@@ -1,9 +1,9 @@
+import { TokenAuthVariables } from '@sdk/api/gqlTypes/TokenAuth';
 import { useSignIn } from '@sdk/api/mutations';
 import { useUserDetails } from '@sdk/api/queries';
 import github from '@sdk/sociallogin/github';
 import { getQueryStringValue } from '@sdk/sociallogin/utils';
 import Loader from 'AppComponents/Loader';
-import { TokenAuthVariables } from 'Generated/TokenAuth';
 import React, { useMemo, useRef } from 'react';
 import { Redirect } from 'react-router';
 import { apiUrl } from '../../constants';
@@ -13,6 +13,12 @@ const redirect = 'http://localhost:3000/ghcb';
 const scope = 'user';
 const gateKeeper = apiUrl;
 
+/**
+ * The logic in this area has problem
+ * 
+ * 
+ * 
+ */
 export const GithubCb = () => {
   github.init({ appId: client_id, gateKeeper, redirect, scope });
 
@@ -23,8 +29,12 @@ export const GithubCb = () => {
   const getGithubUserInfo = useMemo(() => {
     (async () => {
       const code = getQueryStringValue('code');
+
+      // starting from here, i could use a demo data for local and production
       if (code != null && code.length > 0 && githubAuthorizationCode.current == null) {
         githubAuthorizationCode.current = code;
+
+        // TODO error should be handled here for getAccessToken error
         await github.getAccessToken();
         const userInfo = await github.getUserInfo();
         /* Here i need to make a mutation query to send the request to backend.
