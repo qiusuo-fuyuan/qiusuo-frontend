@@ -1,5 +1,6 @@
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
 import { authLink } from '@sdk/api/auth';
+import { } from 'apollo-link';
 import { OverlayProvider } from 'AppComponents/Overlay';
 import { OverlayManager } from 'AppComponents/OverlayManager';
 import React from 'react';

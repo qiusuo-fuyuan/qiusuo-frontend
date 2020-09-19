@@ -1,13 +1,15 @@
 import { useApolloClient } from '@apollo/client';
+import { useUserDetails } from '@sdk/api/queries';
 import React, { useState } from 'react';
 import { OverlayContextInterface } from '../context';
 import Overlay from '../Overlay';
-import { CreateCommunityMutation } from './gqlTypes/CreateCommunityMutation';
+import { CreateCommunityMutation, CreateCommunityMutationVariables } from './gqlTypes/CreateCommunityMutation';
+import { createCommunityMutation } from './queries';
 import './scss/index.scss';
 
 
 type CommunityInput = {
-  name: string;
+  title: string;
   description: string;
   tags: Array<string>;
 };
@@ -15,8 +17,9 @@ type CommunityInput = {
 export const Community: React.FC<{ overlay: OverlayContextInterface }> = (
   { overlay }
 ) => {
-  const [communityInput, setCommunityInput] = useState<CommunityInput>({ name: '', description: '', tags:[''] });
+  const [communityInput, setCommunityInput] = useState<CommunityInput>({ title: '', description: '', tags:[''] });
   const apolloClient = useApolloClient();
+  const { data: user } = useUserDetails();
 
   const handleInput = (event: any) => {
     const { name, value } = event.target;
@@ -26,16 +29,35 @@ export const Community: React.FC<{ overlay: OverlayContextInterface }> = (
     });
   };
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
+    event.stopPropagation();
     /* submit should use the data, and use the community mutation to send to backend 
     for creating this community
     */
-   const queryResult =  apolloClient.mutate<CreateCommunityMutation, CreateCommunityMutationVariables>({ mutation:tokenAuthMutation, variables });
+   const createCommunityArgument: CreateCommunityMutationVariables = {
+     createCommunity: {
+       ownerId: user.userDetails.id,
+       description: communityInput.description,
+       title: communityInput.title,
+       tags: communityInput.tags
+     }
+   };
+
+   /*
+   I need to add one update function here.
+   */
+   const queryResult =  await apolloClient.mutate<CreateCommunityMutation, CreateCommunityMutationVariables>({ mutation:createCommunityMutation, variables: createCommunityArgument });
+   if( queryResult.errors) {
+     console.log(`user ${ user.userDetails.id  } create community ${  communityInput.title  } failed`);
+   } else {
+    console.log(`user ${ user.userDetails.id } created community ${ queryResult.data.createCommunity.title}`);
+   }
   };
   
   return (
     <Overlay testingContext="communityOverlay" context={overlay}>
-      <form className="community-form">
+      <form className="community-form" onSubmit={handleSubmit}>
         <label
           htmlFor="community-form__input--name" 
           className="community-form__label--name"
@@ -44,9 +66,9 @@ export const Community: React.FC<{ overlay: OverlayContextInterface }> = (
         <input
           id="community-form__input--name" 
           type="text"
-          name="name"
+          name="title"
           placeholder="" 
-          value={communityInput.name}
+          value={communityInput.title}
           onChange={handleInput}
         />
 

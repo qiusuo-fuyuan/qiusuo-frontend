@@ -1,4 +1,4 @@
-import { setContext } from 'apollo-link-context';
+import { setContext } from '@apollo/client/link/context';
 
 export const authEvent = new Event('auth');
 
@@ -17,7 +17,7 @@ export function setAuthToken(token: string) {
 
 export function removeAuthToken() {
   localStorage.removeItem('token');
-  dispatchEvent(authEvent);
+  // dispatchEvent(authEvent);
 }
 
 export function clearStorage(): void {

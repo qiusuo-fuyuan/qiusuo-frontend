@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 
-export const CreateCommunityMutation = gql`
+export const createCommunityMutation = gql`
 mutation CreateCommunityMutation($createCommunity: CreateCommunityInput!) {
    createCommunity(createCommunityInput: $createCommunity) { 
      title
