@@ -157,10 +157,15 @@ const getAccessToken = async ():Promise<any> => {
   try {
     const  response = await window.fetch(`${gatekeeperURL}/graphql`, {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         query: `query { githubToken(code:"${authorizationCode}")}`,
       }),
     });
+
+    // TODO window fetch error http status error should be checked
     const  json = await response.json();
     if (json.error || !json.data.githubToken) {
       return Promise.reject(

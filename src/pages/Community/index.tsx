@@ -2,7 +2,7 @@ import { useUserDetails } from '@sdk/api/queries';
 import { AdsBar } from 'AppComponents/AdsBar';
 import { ChannelList } from 'AppComponents/ChannelList';
 import { ChatBoard } from 'AppComponents/ChatBoard';
-import { CommunityList } from 'AppComponents/CommunityList';
+import { MyCommunities } from 'AppComponents/MyCommunities';
 import { OverlayContext, OverlayTheme, OverlayType } from 'AppComponents/Overlay';
 import { UserList } from 'AppComponents/UserList';
 import logo from 'Assets/logo.png';
@@ -30,7 +30,7 @@ export const CommunityPage = () => {
                 )}
             >添加社区
             </button>
-            <CommunityList />
+            <MyCommunities />
           </div>
  
           <div className="community-page_channels">

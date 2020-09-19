@@ -17,7 +17,7 @@ export function setAuthToken(token: string) {
 
 export function removeAuthToken() {
   localStorage.removeItem('token');
-  dispatchEvent(authEvent);
+  // dispatchEvent(authEvent);
 }
 
 export function clearStorage(): void {

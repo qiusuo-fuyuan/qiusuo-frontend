@@ -30,17 +30,24 @@ export const Community: React.FC<{ overlay: OverlayContextInterface }> = (
   };
 
   const handleSubmit = async (event: any) => {
+    event.preventDefault();
     event.stopPropagation();
     /* submit should use the data, and use the community mutation to send to backend 
     for creating this community
     */
-   let variables: CreateCommunityMutationVariables;
-   variables.createCommunity.ownerId = user.userDetails.id;
-   variables.createCommunity.description = communityInput.description;
-   variables.createCommunity.title = communityInput.title;
-   variables.createCommunity.tags = communityInput.tags;
+   const createCommunityArgument: CreateCommunityMutationVariables = {
+     createCommunity: {
+       ownerId: user.userDetails.id,
+       description: communityInput.description,
+       title: communityInput.title,
+       tags: communityInput.tags
+     }
+   };
 
-   const queryResult =  await apolloClient.mutate<CreateCommunityMutation, CreateCommunityMutationVariables>({ mutation:createCommunityMutation, variables });
+   /*
+   I need to add one update function here.
+   */
+   const queryResult =  await apolloClient.mutate<CreateCommunityMutation, CreateCommunityMutationVariables>({ mutation:createCommunityMutation, variables: createCommunityArgument });
    if( queryResult.errors) {
      console.log(`user ${ user.userDetails.id  } create community ${  communityInput.title  } failed`);
    } else {

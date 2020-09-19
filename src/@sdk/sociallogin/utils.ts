@@ -113,6 +113,7 @@ export const cleanLocation = () => {
   );
 };
 
+// TODO: error message format from SDK should be more readable
 export const rslError = (errorObject: RSLError) => {
   const error = [];
 

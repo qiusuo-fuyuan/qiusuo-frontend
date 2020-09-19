@@ -38,7 +38,7 @@ export function useUserDetails(): {data: UserDetails, error:any, loading: boolea
 
   /*
   memo in react will get called first before Fiber Commit, later
-  it will get called 
+  it will get called when the dependency got changed.
   */
   const { unsubscribe } = useMemo(() => {
     if(authenticated) {
@@ -56,6 +56,7 @@ export function useUserDetails(): {data: UserDetails, error:any, loading: boolea
             error should be shown in the frontend.
             */
           } else {
+            console.log(`get user detail returns ${ data.userDetails.name}`);
             setData({ data, loading: false, error: null });
           }
         }

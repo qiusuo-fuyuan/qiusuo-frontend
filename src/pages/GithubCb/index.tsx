@@ -1,3 +1,4 @@
+import { removeAuthToken } from '@sdk/api/auth';
 import { TokenAuthVariables } from '@sdk/api/gqlTypes/TokenAuth';
 import { useSignIn } from '@sdk/api/mutations';
 import { useUserDetails } from '@sdk/api/queries';
@@ -24,8 +25,17 @@ export const GithubCb = () => {
 
   const githubAuthorizationCode = useRef(null);
   const [signIn] = useSignIn();// signIn will create the jwtToken
-  const { data: user } = useUserDetails();
 
+  /* 
+  Two useMemos are used here. They are both asynchrnous call. They will be fired
+  at the same time. However, the correct logic is 
+  (1)first remmove the existing token in the localStorage 
+  (2)redo the login using github access token
+
+  I think in this page, the user should login again. The token in the localStorage shoud
+  be removed first. Then useUserDetails will first check the token, it does not
+  exist, so it will not fire the UserDetails request.
+  */
   const getGithubUserInfo = useMemo(() => {
     (async () => {
       const code = getQueryStringValue('code');
@@ -33,6 +43,7 @@ export const GithubCb = () => {
       // starting from here, i could use a demo data for local and production
       if (code != null && code.length > 0 && githubAuthorizationCode.current == null) {
         githubAuthorizationCode.current = code;
+        removeAuthToken(); // we have to remove the token in the localStorage first
 
         // TODO error should be handled here for getAccessToken error
         await github.getAccessToken();
@@ -54,6 +65,8 @@ export const GithubCb = () => {
       // can we change the page history to home page.
     })();
   }, [githubAuthorizationCode.current]);
+  
+  const { data: user } = useUserDetails();
   
   if (user) {
     return <Redirect to="/me" />;
