@@ -3,6 +3,7 @@ import { TokenAuthVariables } from '@sdk/api/gqlTypes/TokenAuth';
 import { useSignIn } from '@sdk/api/mutations';
 import { useUserDetails } from '@sdk/api/queries';
 import github from '@sdk/sociallogin/github';
+import SocialUser from '@sdk/sociallogin/SocialUser';
 import { getQueryStringValue } from '@sdk/sociallogin/utils';
 import Loader from 'AppComponents/Loader';
 import React, { useMemo, useRef } from 'react';
@@ -15,7 +16,7 @@ const scope = 'user';
 const gateKeeper = apiUrl;
 
 /**
- * The logic in this area has problem
+ * TODO list the detailed steps for github login
  * 
  * 
  * 
@@ -25,7 +26,6 @@ export const GithubCb = () => {
 
   const githubAuthorizationCode = useRef(null);
   const [signIn] = useSignIn();// signIn will create the jwtToken
-
   /* 
   Two useMemos are used here. They are both asynchrnous call. They will be fired
   at the same time. However, the correct logic is 
@@ -47,7 +47,7 @@ export const GithubCb = () => {
 
         // TODO error should be handled here for getAccessToken error
         await github.getAccessToken();
-        const userInfo = await github.getUserInfo();
+        const userInfo: SocialUser = await github.getUserInfo();
         /* Here i need to make a mutation query to send the request to backend.
         The mutation query is createJwtToken
         */
@@ -55,9 +55,10 @@ export const GithubCb = () => {
         {
           authInput:
           {
+            userId : userInfo.profile.userId,
             username: userInfo.profile.name,
-            usertype: 'GITHUB', userId: userInfo.profile.id,
-            avatarUrl: userInfo.profile.profilePicURL
+            usertype: 'GITHUB',
+            avatarUrl: userInfo.profile.avatarUrl
           }
         };
         signIn(tokenAuthParams);
@@ -65,9 +66,9 @@ export const GithubCb = () => {
       // can we change the page history to home page.
     })();
   }, [githubAuthorizationCode.current]);
-  
-  const { data: user } = useUserDetails();
-  
+    
+  const { data: user } = useUserDetails(); // put it here for local testing
+
   if (user) {
     return <Redirect to="/me" />;
   }

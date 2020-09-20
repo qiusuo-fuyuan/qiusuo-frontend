@@ -29,7 +29,10 @@ const Overlay: React.FC<OverlayProps> = ({
       role="button"
       tabIndex={0}
       className={`overlay__${theme}`}
-      onClick={(e) => e.stopPropagation()}
+      onClick={(e) => {
+        e.stopPropagation();
+        console.log('overlay parent button received event');
+      }}
     >
       {children}
     </div>

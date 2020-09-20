@@ -29,15 +29,20 @@ export const Community: React.FC<{ overlay: OverlayContextInterface }> = (
     });
   };
 
+  /**
+   * TODO: update cache should be used here to update the cache in graphql
+   * so that the myCommunities ObservableQuery could get the newest result
+   * and update the my communities result.  
+   */
   const handleSubmit = async (event: any) => {
-    event.preventDefault();
-    event.stopPropagation();
+     event.preventDefault();
+     // event.stopPropagation();
     /* submit should use the data, and use the community mutation to send to backend 
     for creating this community
     */
    const createCommunityArgument: CreateCommunityMutationVariables = {
      createCommunity: {
-       ownerId: user.userDetails.id,
+       ownerId: user.userDetails.userId,
        description: communityInput.description,
        title: communityInput.title,
        tags: communityInput.tags
@@ -49,15 +54,16 @@ export const Community: React.FC<{ overlay: OverlayContextInterface }> = (
    */
    const queryResult =  await apolloClient.mutate<CreateCommunityMutation, CreateCommunityMutationVariables>({ mutation:createCommunityMutation, variables: createCommunityArgument });
    if( queryResult.errors) {
-     console.log(`user ${ user.userDetails.id  } create community ${  communityInput.title  } failed`);
+     console.log(`user ${ user.userDetails.userId  } create community ${  communityInput.title  } failed`);
    } else {
-    console.log(`user ${ user.userDetails.id } created community ${ queryResult.data.createCommunity.title}`);
+    console.log(`user ${ user.userDetails.userId } created community ${ queryResult.data.createCommunity.title}`);
    }
+   overlay.hide();
   };
   
   return (
     <Overlay testingContext="communityOverlay" context={overlay}>
-      <form className="community-form" onSubmit={handleSubmit}>
+      <form className="community-form">
         <label
           htmlFor="community-form__input--name" 
           className="community-form__label--name"
@@ -99,7 +105,7 @@ export const Community: React.FC<{ overlay: OverlayContextInterface }> = (
           value={communityInput.tags}
           onChange={handleInput}
         />
-        <input type="submit" className="community-form__submit value" value="确定" />
+        <button type="submit" className="community-form__submit value" value="确定" onClick={handleSubmit}>确定</button>
 
       </form>
     </Overlay>

@@ -1,4 +1,5 @@
 import uuid from 'uuid5';
+import SocialUser from './SocialUser';
 import { getQueryStringValue, rslError } from './utils';
 
 const GITHUB_API = 'https://api.github.com/graphql';
@@ -68,7 +69,7 @@ const init = ({
  * (2)use accessToken to send a query to github
  * @see https://developer.github.com/apps/building-integrations/setting-up-and-registering-oauth-apps/about-authorization-options-for-oauth-apps/#redirect-urls
  */
-const getUserInfo = async () => {
+const getUserInfo = async (): Promise<SocialUser> => {
   if (!githubAccessToken && oauth) {
     return Promise.reject(
       rslError({
@@ -209,20 +210,15 @@ type GithubUser = {
   };
 };
 
-const generateUser = ({ data: { viewer } }: GithubUser) => {
+const generateUser = ({ data: { viewer } }: GithubUser): SocialUser => {
   return {
+    provider: 'github',
     profile: {
-      id: viewer.id,
-      name: viewer.login,
-      firstName: viewer.name,
-      lastName: viewer.name,
+      userId: viewer.login,
+      name: viewer.name,
       email: viewer.email,
-      profilePicURL: viewer.avatarUrl,
-    },
-    token: {
-      accessToken: githubAccessToken || githubAppId,
-      expiresAt: Infinity,
-    },
+      avatarUrl: viewer.avatarUrl,
+    }
   };
 };
 

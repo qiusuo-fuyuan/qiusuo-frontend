@@ -14,13 +14,18 @@ export interface MyCommunities_myCommunities_channels {
 
 export interface MyCommunities_myCommunities {
   __typename: "Community";
+  id: string;
   title: string;
-  description: string;
-  avatar: string;
-  tags: (string | null)[];
+  description: string | null;
+  avatarUrl: string | null;
+  tags: (string | null)[] | null;
   channels: (MyCommunities_myCommunities_channels | null)[];
 }
 
 export interface MyCommunities {
   myCommunities: (MyCommunities_myCommunities | null)[];
+}
+
+export interface MyCommunitiesVariables {
+  userId: string;
 }

@@ -30,7 +30,9 @@ export const CommunityPage = () => {
                 )}
             >添加社区
             </button>
-            <MyCommunities />
+            {
+              user!= null?  <MyCommunities userId={user.userDetails.userId} />:''
+            }
           </div>
  
           <div className="community-page_channels">

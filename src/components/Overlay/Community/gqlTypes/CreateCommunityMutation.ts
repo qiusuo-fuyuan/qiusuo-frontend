@@ -11,9 +11,10 @@ import { CreateCommunityInput } from "./../../../../../gqlTypes/globalTypes";
 
 export interface CreateCommunityMutation_createCommunity {
   __typename: "Community";
+  id: string;
   title: string;
-  description: string;
-  avatar: string;
+  description: string | null;
+  avatarUrl: string | null;
 }
 
 export interface CreateCommunityMutation {

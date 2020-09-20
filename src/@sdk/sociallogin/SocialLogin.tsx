@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import sdk from '.';
-import SocialUser from './SocialUser';
 import { omit } from './utils';
 
 export interface SocialLoginProps {
@@ -91,11 +90,11 @@ const SocialLogin = (WrappedComponent: React.FC<SocialLoginProps>) =>
      */
     onLoginSuccess(response: any) {
       const { onLoginSuccess, provider } = this.props;
-      const user = new SocialUser(provider);
-      const socialUserData = this.sdk.generateUser(response);
+      // const user = new SocialUser(provider);
+      // const socialUserData = this.sdk.generateUser(response);
 
-      user.profile = socialUserData.profile;
-      user.token = socialUserData.token;
+      // user.profile = socialUserData.profile;
+      // user.token = socialUserData.token;
 
       // Here we check that node is not null,
       // so we can update state before

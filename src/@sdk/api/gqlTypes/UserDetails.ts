@@ -11,6 +11,7 @@ export interface UserDetails_userDetails {
   __typename: "User";
   id: string;
   name: string;
+  userId: string;
   avatarUrl: string | null;
 }
 
