@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { UserDetails } from './gqlTypes/UserDetails';
 import { useAuth } from './helper';
 
+
 export function useUserDetails(): {data: UserDetails, error:any, loading: boolean} {
   const client = useApolloClient();
   const [result, setResult] = useState({
@@ -91,6 +92,7 @@ export const getUserDetails = gql`
     userDetails {
       id
       name
+      userId
       avatarUrl
     }
   }
