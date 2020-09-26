@@ -9,6 +9,7 @@
 
 export interface MyCommunities_myCommunities_channels {
   __typename: "Channel";
+  id: string;
   name: string;
 }
 
@@ -18,7 +19,7 @@ export interface MyCommunities_myCommunities {
   title: string;
   description: string | null;
   avatarUrl: string | null;
-  tags: (string | null)[] | null;
+  tags: (string | null)[];
   channels: (MyCommunities_myCommunities_channels | null)[];
 }
 

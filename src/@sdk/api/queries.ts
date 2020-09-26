@@ -46,7 +46,8 @@ export function useUserDetails(): {data: UserDetails, error:any, loading: boolea
       const observable: ObservableQuery<
       UserDetails,
       { [key: string]: any }
-    > = client.watchQuery({ query: getUserDetails });
+    > = client.watchQuery({ query: getUserDetails, fetchPolicy: 'cache-and-network',
+    nextFetchPolicy: 'cache-first' });
       const subscription = observable.subscribe(
         (queryResult: ApolloQueryResult<UserDetails>) => {
           const { data, errors: apolloErrors } = queryResult;

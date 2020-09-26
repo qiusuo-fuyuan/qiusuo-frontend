@@ -1,9 +1,9 @@
 import React from 'react';
 
 
-export const ChannelList = () => {
+export const Channel = () => {
   return (
-    <div className="channellist">
+    <div className="channel">
       Channel List
     </div>
   );

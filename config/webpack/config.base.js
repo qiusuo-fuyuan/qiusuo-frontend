@@ -17,7 +17,7 @@ module.exports = ({ sourceDir, distDir, envFile }) => {
 
   return {
     entry: `${sourceDir}/index`,
-    devtool: 'eval-source-map',
+    devtool: 'source-map',
     output: {
       path: distDir,
       filename: 'app.bundle.js',
@@ -57,7 +57,6 @@ module.exports = ({ sourceDir, distDir, envFile }) => {
           enforce: 'pre',
           test: /\.js$/,
           loader: 'source-map-loader',
-          exclude: ['/node_modules/'],
         },
       ],
     },
