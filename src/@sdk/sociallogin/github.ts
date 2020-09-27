@@ -23,7 +23,11 @@ The steps used for authenticating through github
 (6)send the login steps to backend using the user id.
  */
 /**
- * When github page is loaded in the same browser, promise will not work.
+ * When github page is loaded in the same page, promise will not work.
+ * Because the domain address has changed. 
+ * 
+ * There is no need to use promise for init.Even its promise, there is no bad effect.It's
+ * executed in the same iteration.
  * @param {string} appId
  * @param {string} redirect
  * @param {array|string} scope

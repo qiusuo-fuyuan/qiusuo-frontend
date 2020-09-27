@@ -32,22 +32,17 @@
     "predeploy": "npm run build",
     "genxml": "folder-to-xml ./src/blogs ./src/config/blog-categories.xml",
     "deploy": "gh-pages -t -b master -d dist",
-    "schemadownload": "npx apollo schema:download --endpoint=http://localhost:4000/graphql schema.graphql",
+    "schemadownload": "npx apollo schema:download --endpoint=http://localhost:8080/graphql schema.graphql",
     "codegen": "npx apollo client:codegen --target=typescript gqlTypes",
-    "updateRemote": "npx apollo service:push --graph=tech-blog --endpoint=http://localhost:8080/graphql",
+    "updateRemote": "npx apollo service:push --graph=qiusuo --endpoint=http://localhost:8080/graphql",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src --color",
     "format": "prettier --write src/**/*.{ts,tsx}"
   },
-  "browserslist": {
-    "production": [
-      ">0.5%"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "browserslist": [
+    "last 1 chrome version",
+    "last 1 firefox version",
+    "last 1 safari version"
+  ],
   "devDependencies": {
     "@babel/core": "^7.9.6",
     "@babel/plugin-proposal-class-properties": "^7.8.3",

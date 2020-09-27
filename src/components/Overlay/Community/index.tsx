@@ -52,7 +52,21 @@ export const Community: React.FC<{ overlay: OverlayContextInterface }> = (
    /*
    I need to add one update function here.
    */
-   const queryResult =  await apolloClient.mutate<CreateCommunityMutation, CreateCommunityMutationVariables>({ mutation:createCommunityMutation, variables: createCommunityArgument });
+   const queryResult =  await apolloClient.mutate<CreateCommunityMutation, CreateCommunityMutationVariables>({ mutation:createCommunityMutation, 
+      variables: createCommunityArgument,
+      updateQueries : {
+        // updateQueries need to take the operation name 
+        MyCommunities: (previousResult, { mutationResult }) => {
+          console.log('previousResult', previousResult);
+          console.log('mutationResult', mutationResult);
+          const newCommunity = mutationResult.data.createCommunity;
+          const allCommunities = {
+            myCommunities: [...previousResult.myCommunities, newCommunity],
+          };
+          return allCommunities;
+        }
+      } 
+    });
    if( queryResult.errors) {
      console.log(`user ${ user.userDetails.userId  } create community ${  communityInput.title  } failed`);
    } else {

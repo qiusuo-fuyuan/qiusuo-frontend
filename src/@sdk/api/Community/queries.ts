@@ -81,6 +81,7 @@ export const getMyCommunities = gql`
       avatarUrl
       tags
       channels {
+        id
         name
       }
     }
