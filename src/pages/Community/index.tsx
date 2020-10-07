@@ -1,8 +1,9 @@
 import { MyCommunities_myCommunities, MyCommunities_myCommunities_channels } from '@sdk/api/Community/gqlTypes/MyCommunities';
 import { useUserDetails } from '@sdk/api/queries';
 import { AdsBar } from 'AppComponents/AdsBar';
+import { ChannelList } from 'AppComponents/ChannelList';
 import { ChatBoard } from 'AppComponents/ChatBoard';
-import { MyCommunities } from 'AppComponents/MyCommunities';
+import { CommunityList } from 'AppComponents/CommunityList';
 import { OverlayContext, OverlayTheme, OverlayType } from 'AppComponents/Overlay';
 import { UserList } from 'AppComponents/UserList';
 import logo from 'Assets/logo.png';
@@ -13,12 +14,14 @@ import './scss/index.scss';
 export const CommunityPage = () => {
   const { data: user } = useUserDetails();
   const [activeCommunity, setActiveCommunity] = useState<MyCommunities_myCommunities>(null);
-  
+  const [activeChannel, setActiveChannel] = useState<MyCommunities_myCommunities_channels>(null);
+
   const selectCommunity = (community: MyCommunities_myCommunities) => {
     setActiveCommunity(community);
   };
 
   const selectChannel = (channel: MyCommunities_myCommunities_channels) => {
+    setActiveChannel(channel);
     console.log(`channel ${channel.name  } is selected`);
   };
 
@@ -40,28 +43,10 @@ export const CommunityPage = () => {
             >添加社区
             </button>
             {
-              user!= null?  <MyCommunities userId={user.userDetails.userId} selectCommunity={selectCommunity} />:''
+              user!= null?  <CommunityList userId={user.userDetails.userId} selectCommunity={selectCommunity} />:''
             }
           </div>
- 
-          <div className="community-page_channels">
-            <button className="community-page__create-channel__btn">添加频道
-            </button>
-            <div>
-              {
-                activeCommunity!=null && activeCommunity.channels.map((element, index) => {
-                  return <div
-                    className={element.name} 
-                    role="button"
-                    key={element.id}
-                    tabIndex={index}
-                    onClick={() => selectChannel(element)}
-                  >{element.name}
-                  </div>;
-                })
-              }
-            </div>
-          </div>
+          <ChannelList selectChannel={selectChannel} activeCommunity={activeCommunity} />
           <div className="community-page__right">
             <div className="community-page__right--header">
               <AdsBar />

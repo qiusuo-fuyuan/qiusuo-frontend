@@ -57,8 +57,6 @@ export const Community: React.FC<{ overlay: OverlayContextInterface }> = (
       updateQueries : {
         // updateQueries need to take the operation name 
         MyCommunities: (previousResult, { mutationResult }) => {
-          console.log('previousResult', previousResult);
-          console.log('mutationResult', mutationResult);
           const newCommunity = mutationResult.data.createCommunity;
           const allCommunities = {
             myCommunities: [...previousResult.myCommunities, newCommunity],

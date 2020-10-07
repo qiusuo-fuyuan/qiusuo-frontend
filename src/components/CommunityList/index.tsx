@@ -8,12 +8,12 @@ I need to call the backend to get a list of
 communities
 */
 
-type MyCommunitiesProps = {
+type CommunityListProps = {
   userId: string;
   selectCommunity: (community: MyCommunities_myCommunities) => void
 };
 
-export const MyCommunities = (props: MyCommunitiesProps) => {
+export const CommunityList = (props: CommunityListProps) => {
   const { data: myCommunities } = useMyCommunities(props.userId);  
   return (
     <div className="my-communities">
