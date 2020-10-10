@@ -8,3 +8,4 @@ apollo.config.js
 babel.config.js
 jest.config.js
 config/*
+src/lib/*

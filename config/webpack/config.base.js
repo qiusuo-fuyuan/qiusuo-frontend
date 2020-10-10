@@ -29,6 +29,7 @@ module.exports = ({ sourceDir, distDir, envFile }) => {
         AppComponents: `${sourceDir}/components/`,
         AppConfig: `${sourceDir}/config/`,
         Assets: `${sourceDir}/assets/`,
+        Lib: `${sourceDir}/lib`,
       },
     },
     module: {
