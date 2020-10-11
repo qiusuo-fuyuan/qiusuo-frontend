@@ -2,17 +2,21 @@ import { MyCommunities_myCommunities, MyCommunities_myCommunities_channels } fro
 import React from 'react';
 
 
-type ChannelListProps = {
+type ChannelMenuProps = {
   activeCommunity: MyCommunities_myCommunities;
   selectChannel: (channel: MyCommunities_myCommunities_channels) => void
 };
 
-export const ChannelList = (props: ChannelListProps) => {
+
+/**
+ * TODO: classname should be a composed classname
+ */
+export const ChannelMenu = (props: ChannelMenuProps) => {
   const { activeCommunity, selectChannel } = props;
 
   return (
-    <div className="community-page_channels">
-      <button className="community-page__create-channel__btn">添加频道
+    <div className="channels-menu">
+      <button className="channels-menu__create-btn">添加频道
       </button>
       <div>
         {

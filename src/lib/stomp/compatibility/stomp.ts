@@ -1,6 +1,6 @@
-import { Versions } from '../versions';
+import { Versions } from '../src/versions';
 import { CompatClient } from './compat-client';
-import { IStompSocket } from '../types';
+import { IStompSocket } from '../src/types';
 
 declare const WebSocket: {
   prototype: IStompSocket;

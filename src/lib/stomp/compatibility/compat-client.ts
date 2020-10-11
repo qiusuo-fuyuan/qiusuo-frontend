@@ -1,6 +1,6 @@
 import { Client } from '../client';
-import { StompHeaders } from '../stomp-headers';
-import { frameCallbackType, messageCallbackType } from '../types';
+import { StompHeaders } from '../src/stomp-headers';
+import { frameCallbackType, messageCallbackType } from '../src/types';
 import { HeartbeatInfo } from './heartbeat-info';
 
 /**

@@ -15,6 +15,7 @@ export const StompProvider = (props: StompProviderProps) => {
   const { config, children } = props;
   const client: StompClient = new StompClient(config);
 
+  // onConnect should not be placed here
   client.onConnect = function (frame) {
     console.log(frame);
     // Do something, all subscribes must be done is this callback
@@ -29,8 +30,6 @@ export const StompProvider = (props: StompProviderProps) => {
     console.log(`Broker reported error: ${  frame.headers.message}`);
     console.log(`Additional details: ${  frame.body}`);
   };
-
-  client.activate();
   return (
     <StompContext.Provider value={client}>
       {children}

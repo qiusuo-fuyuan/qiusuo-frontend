@@ -14,7 +14,7 @@ type CommunityInput = {
   tags: Array<string>;
 };
 
-export const Community: React.FC<{ overlay: OverlayContextInterface }> = (
+export const CommunityForm: React.FC<{ overlay: OverlayContextInterface }> = (
   { overlay }
 ) => {
   const [communityInput, setCommunityInput] = useState<CommunityInput>({ title: '', description: '', tags:[''] });

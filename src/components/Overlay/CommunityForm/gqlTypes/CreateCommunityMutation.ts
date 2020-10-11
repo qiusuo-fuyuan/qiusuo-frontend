@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { CreateCommunityInput } from "./../../../../../gqlTypes/globalTypes";
+import { CreateCommunityInput } from "../../../../../gqlTypes/globalTypes";
 
 // ====================================================
 // GraphQL mutation operation: CreateCommunityMutation

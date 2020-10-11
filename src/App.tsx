@@ -27,7 +27,8 @@ const client = new ApolloClient({
       fetchPolicy: 'cache-and-network',
     },
   },
-  connectToDevTools: true
+  // TODO: should be removed on production or set the value dynamically based on DEV/PROD profile
+  connectToDevTools: true 
 });
 
 
