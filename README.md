@@ -10,6 +10,7 @@ Spring Boot Backend
 
 git clone https://github.com/qiusuo-fuyuan/qiusuo-frontend.git\
 cd qiusuo-frontend\
+touch .env.dev&touch.env.prod\
 npm install
 
 You have to create two environment file. These two files are not uploaded to Github
