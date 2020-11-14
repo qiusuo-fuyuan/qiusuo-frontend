@@ -8,9 +8,9 @@ export interface InnerOverlayContextInterface {
 }
 
 export enum OverlayType {
-  community = 'create-community',
-  channel = 'create-channel',
-  myaccount = 'myaccount',
+  create_community = 'create-community',
+  create_channel = 'create-channel',
+  show_myaccount = 'myaccount',
   message = 'message',
 }
 

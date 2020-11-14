@@ -14,7 +14,7 @@ type CommunityInput = {
   tags: Array<string>;
 };
 
-export const Community: React.FC<{ overlay: OverlayContextInterface }> = (
+export const CommunityForm: React.FC<{ overlay: OverlayContextInterface }> = (
   { overlay }
 ) => {
   const [communityInput, setCommunityInput] = useState<CommunityInput>({ title: '', description: '', tags:[''] });
@@ -41,7 +41,7 @@ export const Community: React.FC<{ overlay: OverlayContextInterface }> = (
     for creating this community
     */
    const createCommunityArgument: CreateCommunityMutationVariables = {
-     createCommunity: {
+     createCommunityInput: {
        ownerId: user.userDetails.userId,
        description: communityInput.description,
        title: communityInput.title,
@@ -66,8 +66,10 @@ export const Community: React.FC<{ overlay: OverlayContextInterface }> = (
       } 
     });
    if( queryResult.errors) {
+     // TODO: Handle error
      console.log(`user ${ user.userDetails.userId  } create community ${  communityInput.title  } failed`);
    } else {
+     // TODO: handle correct result
     console.log(`user ${ user.userDetails.userId } created community ${ queryResult.data.createCommunity.title}`);
    }
    overlay.hide();
@@ -117,8 +119,9 @@ export const Community: React.FC<{ overlay: OverlayContextInterface }> = (
           value={communityInput.tags}
           onChange={handleInput}
         />
-        <button type="submit" className="community-form__submit value" value="确定" onClick={handleSubmit}>确定</button>
-
+        <button type="submit" className="community-form__submit value" value="确定" onClick={handleSubmit}>
+          确定
+        </button>
       </form>
     </Overlay>
   );

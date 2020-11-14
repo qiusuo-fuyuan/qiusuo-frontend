@@ -38,12 +38,14 @@ const stompConfig: StompConfig = {
     login: 'user',
     passcode: 'password'
   },
-  debug(str) {
-    console.log(str);
-  },
   reconnectDelay: 5000,
   heartbeatIncoming: 4000,
   heartbeatOutgoing: 4000
+  /*
+  debug(str) {
+    console.log(str);
+  },
+  */
 };
 
 function App() {

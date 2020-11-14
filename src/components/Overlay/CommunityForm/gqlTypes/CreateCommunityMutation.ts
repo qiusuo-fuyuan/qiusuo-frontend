@@ -22,5 +22,5 @@ export interface CreateCommunityMutation {
 }
 
 export interface CreateCommunityMutationVariables {
-  createCommunity: CreateCommunityInput;
+  createCommunityInput: CreateCommunityInput;
 }

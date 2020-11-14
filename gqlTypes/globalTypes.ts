@@ -7,6 +7,18 @@
 // START Enums and Input Objects
 //==============================================================
 
+export enum ChannelType {
+  CHAT = "CHAT",
+  LIVE_STREAMING = "LIVE_STREAMING",
+  QA = "QA",
+}
+
+export interface CreateChannelInput {
+  communityId: string;
+  name: string;
+  channelType: ChannelType;
+}
+
 export interface CreateCommunityInput {
   ownerId: string;
   title: string;
