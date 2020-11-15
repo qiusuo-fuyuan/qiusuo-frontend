@@ -1,6 +1,7 @@
 import { ApolloQueryResult, gql, ObservableQuery, useApolloClient } from '@apollo/client';
 import { isEqual } from 'lodash';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { communityDetailFragment } from '../fragments/community';
 import { MyCommunities, MyCommunitiesVariables } from './gqlTypes/MyCommunities';
 
 
@@ -72,18 +73,12 @@ export function useMyCommunities(uid: string): {data: MyCommunities, error:any, 
   return result;
 }
 
+
 export const getMyCommunities = gql`
+  ${communityDetailFragment}
   query MyCommunities($userId: ID!) {
     myCommunities(userId: $userId) {
-      id
-      title
-      description  
-      avatarUrl
-      tags
-      channels {
-        id
-        name
-      }
+      ...CommunityDetail
     }
   }
 `;

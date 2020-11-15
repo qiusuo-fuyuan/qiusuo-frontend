@@ -8,7 +8,6 @@ type ChannelNavigatorProps = {
   selectChannel: (channel: MyCommunities_myCommunities_channels) => void
 };
 
-
 /**
  * TODO: classname should be a composed classname
  */

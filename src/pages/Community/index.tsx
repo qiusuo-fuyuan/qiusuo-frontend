@@ -17,7 +17,7 @@ export const CommunityPage = () => {
 
   const selectCommunity = (community: MyCommunities_myCommunities) => {
     setActiveCommunity(community);
-    console.log(`channel ${community.title  } is selected`);
+    console.log(`community ${community.title  } is selected`);
   };
 
   const selectChannel = (channel: MyCommunities_myCommunities_channels) => {

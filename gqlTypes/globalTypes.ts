@@ -20,7 +20,7 @@ export interface CreateChannelInput {
 }
 
 export interface CreateCommunityInput {
-  ownerId: string;
+  userId: string;
   title: string;
   description: string;
   tags: (string | null)[];

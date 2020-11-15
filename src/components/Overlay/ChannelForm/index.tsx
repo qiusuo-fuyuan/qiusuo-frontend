@@ -43,7 +43,7 @@ export const ChannelForm: React.FC<{ overlay: OverlayContextInterface }> = (
 
       // here, the channelType should not import from globalTypes
       channelType: ChannelType.CHAT,
-      communityId: overlay.context.data.community.communityId
+      communityId: overlay.context.data.community.id
       }
     };
 
@@ -58,7 +58,7 @@ export const ChannelForm: React.FC<{ overlay: OverlayContextInterface }> = (
    console.log(`user ${ user.userDetails.userId  } create channel ${  channelInput.name  } failed`);
  } else {
    // TODO: handle correct result
-  console.log(`user ${ user.userDetails.userId } created channel ${ queryResult.data.createChannel.name}`);
+  console.log(`user ${ user.userDetails.userId } created channel ${ queryResult.data.addChannel.channels}`);
  }
  overlay.hide();
   };

@@ -1,4 +1,5 @@
 import { useApolloClient } from '@apollo/client';
+import { MyCommunities } from '@sdk/api/Community/gqlTypes/MyCommunities';
 import { useUserDetails } from '@sdk/api/queries';
 import React, { useState } from 'react';
 import { OverlayContextInterface } from '../context';
@@ -42,7 +43,7 @@ export const CommunityForm: React.FC<{ overlay: OverlayContextInterface }> = (
     */
    const createCommunityArgument: CreateCommunityMutationVariables = {
      createCommunityInput: {
-       ownerId: user.userDetails.userId,
+       userId: user.userDetails.userId,
        description: communityInput.description,
        title: communityInput.title,
        tags: communityInput.tags
@@ -56,7 +57,7 @@ export const CommunityForm: React.FC<{ overlay: OverlayContextInterface }> = (
       variables: createCommunityArgument,
       updateQueries : {
         // updateQueries need to take the operation name 
-        MyCommunities: (previousResult, { mutationResult }) => {
+        MyCommunities: (previousResult: MyCommunities, { mutationResult }) => {
           const newCommunity = mutationResult.data.createCommunity;
           const allCommunities = {
             myCommunities: [...previousResult.myCommunities, newCommunity],
