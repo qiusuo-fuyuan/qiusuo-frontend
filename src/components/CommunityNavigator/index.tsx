@@ -1,5 +1,4 @@
-import { MyCommunities_myCommunities } from '@sdk/api/Community/gqlTypes/MyCommunities';
-import { useMyCommunities } from '@sdk/api/Community/queries';
+import { MyCommunities, MyCommunities_myCommunities } from '@sdk/api/Community/gqlTypes/MyCommunities';
 import { OverlayContext, OverlayTheme, OverlayType } from 'AppComponents/Overlay';
 import React from 'react';
 import './scss/index.scss';
@@ -10,12 +9,12 @@ communities
 */
 
 type CommunityNavigatorProps = {
-  userId: string;
+  myCommunities: MyCommunities,
   selectCommunity: (community: MyCommunities_myCommunities) => void
 };
 
 export const CommunityNavigator: React.FC<CommunityNavigatorProps> = (props: CommunityNavigatorProps) => {
-  const { data: myCommunities } = useMyCommunities(props.userId);  
+  const { myCommunities } = props;
   return (
     <OverlayContext.Consumer>
       { overlayContext => (

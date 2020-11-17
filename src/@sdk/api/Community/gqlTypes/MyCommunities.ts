@@ -28,7 +28,3 @@ export interface MyCommunities_myCommunities {
 export interface MyCommunities {
   myCommunities: (MyCommunities_myCommunities | null)[];
 }
-
-export interface MyCommunitiesVariables {
-  userId: string;
-}

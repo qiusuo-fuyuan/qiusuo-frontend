@@ -1,4 +1,5 @@
 import { MyCommunities_myCommunities, MyCommunities_myCommunities_channels } from '@sdk/api/Community/gqlTypes/MyCommunities';
+import { useMyCommunities } from '@sdk/api/Community/queries';
 import { useUserDetails } from '@sdk/api/queries';
 import { AdsBar } from 'AppComponents/AdsBar';
 import { ChannelNavigator } from 'AppComponents/ChannelNavigator';
@@ -11,7 +12,10 @@ import './scss/index.scss';
 
 
 export const CommunityPage = () => {
+  // something has to be done here.
   const { data: user } = useUserDetails();
+  const { data: myCommunities } =  useMyCommunities();  
+
   const [activeCommunity, setActiveCommunity] = useState<MyCommunities_myCommunities>(null);
   const [activeChannel, setActiveChannel] = useState<MyCommunities_myCommunities_channels>(null);
 
@@ -33,7 +37,7 @@ export const CommunityPage = () => {
           <img className="logo" src={logo} alt="logo" />
         </a>
         { 
-          !user? '': <CommunityNavigator userId={user.userDetails.userId} selectCommunity={selectCommunity} />
+          !user? '': <CommunityNavigator myCommunities={myCommunities} selectCommunity={selectCommunity} />
         }
       </div>
       <ChannelNavigator selectChannel={selectChannel} activeCommunity={activeCommunity} />
