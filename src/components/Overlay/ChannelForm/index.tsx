@@ -1,4 +1,5 @@
 import { useApolloClient } from '@apollo/client';
+import { getMyCommunities } from '@sdk/api/Community/queries';
 import { useUserDetails } from '@sdk/api/queries';
 import React, { useState } from 'react';
 import { ChannelType } from '../../../../gqlTypes/globalTypes';
@@ -15,7 +16,7 @@ type ChannelInput = {
 export const ChannelForm: React.FC<{ overlay: OverlayContextInterface }> = (
   { overlay }
 ) => {
-  
+
   const [channelInput, setChannelInput] = useState<ChannelInput>({ name: '' });
   const apolloClient = useApolloClient();
   const { data: user } = useUserDetails();
@@ -51,7 +52,10 @@ export const ChannelForm: React.FC<{ overlay: OverlayContextInterface }> = (
    I need to add one update function here.
    */
   const queryResult =  await apolloClient.mutate<CreateChannelMutation, CreateChannelMutationVariables>({ mutation:createChannelMutation, 
-    variables: createChannelArgument
+    variables: createChannelArgument,
+    refetchQueries: ( result ) => {
+      return [{ query: getMyCommunities, variables: { userId: user.userDetails.userId } }];
+    }
   });
  if( queryResult.errors) {
    // TODO: Handle error
