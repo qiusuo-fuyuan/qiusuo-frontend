@@ -6,26 +6,7 @@
   >.community-page__communities {
     display: flex;
     flex-direction: column;
-
-    .community-page__create-community__btn {
-      background-color: #5BB3AA;
-    }
-
-    .communitylist {
-      flex-grow: 1;
-      color:white;
-      background-color:#ceccea;
-    }
- }
-
- >.community-page_channels {
-   display: flex;
-   flex-direction: column;
-   background-color: #5BB3AA;
-
-   .channellist {
-    flex-grow: 1;
-   }
+    background-color: #007bff40;
  }
 
  >.community-page__right {

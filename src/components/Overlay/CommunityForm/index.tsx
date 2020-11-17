@@ -1,4 +1,5 @@
 import { useApolloClient } from '@apollo/client';
+import { MyCommunities } from '@sdk/api/Community/gqlTypes/MyCommunities';
 import { useUserDetails } from '@sdk/api/queries';
 import React, { useState } from 'react';
 import { OverlayContextInterface } from '../context';
@@ -14,7 +15,7 @@ type CommunityInput = {
   tags: Array<string>;
 };
 
-export const Community: React.FC<{ overlay: OverlayContextInterface }> = (
+export const CommunityForm: React.FC<{ overlay: OverlayContextInterface }> = (
   { overlay }
 ) => {
   const [communityInput, setCommunityInput] = useState<CommunityInput>({ title: '', description: '', tags:[''] });
@@ -41,8 +42,8 @@ export const Community: React.FC<{ overlay: OverlayContextInterface }> = (
     for creating this community
     */
    const createCommunityArgument: CreateCommunityMutationVariables = {
-     createCommunity: {
-       ownerId: user.userDetails.userId,
+     createCommunityInput: {
+       userId: user.userDetails.userId,
        description: communityInput.description,
        title: communityInput.title,
        tags: communityInput.tags
@@ -56,7 +57,7 @@ export const Community: React.FC<{ overlay: OverlayContextInterface }> = (
       variables: createCommunityArgument,
       updateQueries : {
         // updateQueries need to take the operation name 
-        MyCommunities: (previousResult, { mutationResult }) => {
+        MyCommunities: (previousResult: MyCommunities, { mutationResult }) => {
           const newCommunity = mutationResult.data.createCommunity;
           const allCommunities = {
             myCommunities: [...previousResult.myCommunities, newCommunity],
@@ -66,8 +67,10 @@ export const Community: React.FC<{ overlay: OverlayContextInterface }> = (
       } 
     });
    if( queryResult.errors) {
+     // TODO: Handle error
      console.log(`user ${ user.userDetails.userId  } create community ${  communityInput.title  } failed`);
    } else {
+     // TODO: handle correct result
     console.log(`user ${ user.userDetails.userId } created community ${ queryResult.data.createCommunity.title}`);
    }
    overlay.hide();
@@ -117,8 +120,9 @@ export const Community: React.FC<{ overlay: OverlayContextInterface }> = (
           value={communityInput.tags}
           onChange={handleInput}
         />
-        <button type="submit" className="community-form__submit value" value="确定" onClick={handleSubmit}>确定</button>
-
+        <button type="submit" className="community-form__submit value" value="确定" onClick={handleSubmit}>
+          确定
+        </button>
       </form>
     </Overlay>
   );

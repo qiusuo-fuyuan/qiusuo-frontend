@@ -1,14 +1,15 @@
 import { ApolloQueryResult, gql, ObservableQuery, useApolloClient } from '@apollo/client';
 import { isEqual } from 'lodash';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { MyCommunities, MyCommunitiesVariables } from './gqlTypes/MyCommunities';
+import { communityDetailFragment } from '../fragments/community';
+import { MyCommunities } from './gqlTypes/MyCommunities';
 
 
 /**
  * for my communitites, current user id should be passed
  * for getting my communitites data
  */
-export function useMyCommunities(uid: string): {data: MyCommunities, error:any, loading: boolean} {
+export function useMyCommunities(): {data: MyCommunities, error:any, loading: boolean} {
   const client = useApolloClient();
   const [result, setResult] = useState({
     data: null,
@@ -35,7 +36,7 @@ export function useMyCommunities(uid: string): {data: MyCommunities, error:any, 
       const observable: ObservableQuery<
       MyCommunities,
       { [key: string]: any }
-    > = client.watchQuery<MyCommunities, MyCommunitiesVariables>({ query: getMyCommunities, variables: { userId: uid } });
+    > = client.watchQuery<MyCommunities>({ query: getMyCommunities });
       const subscription = observable.subscribe(
         (queryResult: ApolloQueryResult<MyCommunities>) => {
           const { data, errors: apolloErrors } = queryResult;
@@ -72,18 +73,12 @@ export function useMyCommunities(uid: string): {data: MyCommunities, error:any, 
   return result;
 }
 
+
 export const getMyCommunities = gql`
-  query MyCommunities($userId: ID!) {
-    myCommunities(userId: $userId) {
-      id
-      title
-      description  
-      avatarUrl
-      tags
-      channels {
-        id
-        name
-      }
+  ${communityDetailFragment}
+  query MyCommunities {
+    myCommunities {
+      ...CommunityDetail
     }
   }
 `;
