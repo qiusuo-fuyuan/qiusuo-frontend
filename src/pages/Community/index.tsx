@@ -30,7 +30,6 @@ export const CommunityPage = () => {
   };
 
   return (
-
     <div className="community-page">
       <div className="community-page__communities">
         <a href="/">
@@ -40,9 +39,9 @@ export const CommunityPage = () => {
           !user? '': <CommunityNavigator myCommunities={myCommunities} selectCommunity={selectCommunity} />
         }
       </div>
-      <ChannelNavigator selectChannel={selectChannel} activeCommunity={activeCommunity} />
+      <ChannelNavigator selectChannel={selectChannel} activeCommunity={!myCommunities? null : myCommunities.myCommunities.find(elem => elem.active)} />
       <div className="community-page__right">
-        <div className="community-page__right--header">
+        <div className="community-page__right--header">                                                                                                                                                                                                                                                                                                         
           <AdsBar />
           <li>
             {!user ? '':
