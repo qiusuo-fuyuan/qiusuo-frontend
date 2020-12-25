@@ -1,5 +1,5 @@
 import { useApolloClient } from '@apollo/client';
-import { MyCommunities } from '@sdk/api/Community/gqlTypes/MyCommunities';
+import { getMyCommunities } from '@sdk/api/Community/queries';
 import { useUserDetails } from '@sdk/api/queries';
 import React, { useState } from 'react';
 import { OverlayContextInterface } from '../context';
@@ -56,18 +56,7 @@ export const CommunityForm: React.FC<{ overlay: OverlayContextInterface }> = (
    */
    const queryResult =  await apolloClient.mutate<CreateCommunityMutation, CreateCommunityMutationVariables>({ mutation:createCommunityMutation, 
       variables: createCommunityArgument,
-      updateQueries : {
-        // updateQueries need to take the operation name 
-        MyCommunities: (previousResult: MyCommunities, { mutationResult }) => {
-          const newCommunity = mutationResult.data.createCommunity;
-          const allCommunities = {
-            myCommunities: [...previousResult.myCommunities, newCommunity],
-            activeCommunity: newCommunity,
-            activeChannel: newCommunity.channels[0]
-          };
-          return allCommunities;
-        }
-      } 
+      refetchQueries: [{ query: getMyCommunities }]
     });
    if( queryResult.errors) {
      // TODO: Handle error

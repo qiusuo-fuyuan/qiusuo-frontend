@@ -1,4 +1,5 @@
-import { ApolloCache, FetchResult, makeReference, useApolloClient } from '@apollo/client';
+import { useApolloClient } from '@apollo/client';
+import { getMyCommunities } from '@sdk/api/Community/queries';
 import { useUserDetails } from '@sdk/api/queries';
 import React, { useState } from 'react';
 import { ChannelType } from '../../../../gqlTypes/globalTypes';
@@ -55,16 +56,7 @@ export const ChannelForm: React.FC<{ overlay: OverlayContextInterface }> = (
    */
   const queryResult =  await apolloClient.mutate<CreateChannelMutation, CreateChannelMutationVariables>({ mutation:createChannelMutation, 
     variables: createChannelArgument,
-    update: (cache: ApolloCache<CreateChannelMutation>, mutationResult: FetchResult<CreateChannelMutation>) => {
-      const addedChannel = mutationResult.data.addChannel;
-      cache.modify({
-        fields:{
-          activeChannel(value) {
-            return makeReference(`Channel:${addedChannel.id}`);
-          }
-        }
-      });
-    },
+    refetchQueries: [{ query: getMyCommunities }]
   });
  if( queryResult.errors) {
    // TODO: Handle error
