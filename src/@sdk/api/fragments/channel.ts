@@ -5,7 +5,6 @@ export const channelDetailFragment = gql`
     fragment ChannelDetail on Channel {
       id
       name
-      active
     }
 `;
 

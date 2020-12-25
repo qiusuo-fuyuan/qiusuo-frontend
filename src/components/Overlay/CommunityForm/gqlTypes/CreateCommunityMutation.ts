@@ -13,7 +13,6 @@ export interface CreateCommunityMutation_createCommunity_channels {
   __typename: "Channel";
   id: string;
   name: string;
-  active: boolean;
 }
 
 export interface CreateCommunityMutation_createCommunity {
@@ -23,7 +22,6 @@ export interface CreateCommunityMutation_createCommunity {
   description: string | null;
   avatarUrl: string | null;
   tags: (string | null)[];
-  active: boolean;
   channels: (CreateCommunityMutation_createCommunity_channels | null)[];
 }
 

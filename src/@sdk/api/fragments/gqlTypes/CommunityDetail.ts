@@ -11,7 +11,6 @@ export interface CommunityDetail_channels {
   __typename: "Channel";
   id: string;
   name: string;
-  active: boolean;
 }
 
 export interface CommunityDetail {
@@ -21,6 +20,5 @@ export interface CommunityDetail {
   description: string | null;
   avatarUrl: string | null;
   tags: (string | null)[];
-  active: boolean;
   channels: (CommunityDetail_channels | null)[];
 }

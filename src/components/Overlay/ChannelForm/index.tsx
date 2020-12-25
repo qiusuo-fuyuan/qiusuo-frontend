@@ -1,5 +1,4 @@
-import { useApolloClient } from '@apollo/client';
-import { getMyCommunities } from '@sdk/api/Community/queries';
+import { ApolloCache, FetchResult, makeReference, useApolloClient } from '@apollo/client';
 import { useUserDetails } from '@sdk/api/queries';
 import React, { useState } from 'react';
 import { ChannelType } from '../../../../gqlTypes/globalTypes';
@@ -49,13 +48,23 @@ export const ChannelForm: React.FC<{ overlay: OverlayContextInterface }> = (
     };
 
    /*
-   I need to add one update function here.
+   After add the new channel, we need to set the new channel as the current active channel
+   (1)Fetch the query from backend. This is not performant
+   (2)Update Cache manually
+      we can update the reference directly
    */
   const queryResult =  await apolloClient.mutate<CreateChannelMutation, CreateChannelMutationVariables>({ mutation:createChannelMutation, 
     variables: createChannelArgument,
-    refetchQueries: ( result ) => {
-      return [{ query: getMyCommunities, variables: { userId: user.userDetails.userId } }];
-    }
+    update: (cache: ApolloCache<CreateChannelMutation>, mutationResult: FetchResult<CreateChannelMutation>) => {
+      const addedChannel = mutationResult.data.addChannel;
+      cache.modify({
+        fields:{
+          activeChannel(value) {
+            return makeReference(`Channel:${addedChannel.id}`);
+          }
+        }
+      });
+    },
   });
  if( queryResult.errors) {
    // TODO: Handle error

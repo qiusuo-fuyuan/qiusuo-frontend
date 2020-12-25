@@ -43,6 +43,7 @@ export const CommunityForm: React.FC<{ overlay: OverlayContextInterface }> = (
     */
    const createCommunityArgument: CreateCommunityMutationVariables = {
      createCommunityInput: {
+       // TODO: Do i really need to pass the userId to backend
        userId: user.userDetails.userId,
        description: communityInput.description,
        title: communityInput.title,
@@ -61,6 +62,8 @@ export const CommunityForm: React.FC<{ overlay: OverlayContextInterface }> = (
           const newCommunity = mutationResult.data.createCommunity;
           const allCommunities = {
             myCommunities: [...previousResult.myCommunities, newCommunity],
+            activeCommunity: newCommunity,
+            activeChannel: newCommunity.channels[0]
           };
           return allCommunities;
         }
