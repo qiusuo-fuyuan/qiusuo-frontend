@@ -17,10 +17,10 @@ export interface MyCommunities_myCommunities {
   __typename: "Community";
   id: string;
   title: string;
-  description: string | null;
+  description: string;
   avatarUrl: string | null;
-  tags: (string | null)[];
-  channels: (MyCommunities_myCommunities_channels | null)[];
+  tags: (string | null)[] | null;
+  channels: (MyCommunities_myCommunities_channels | null)[] | null;
 }
 
 export interface MyCommunities_activeCommunity_channels {
@@ -33,10 +33,10 @@ export interface MyCommunities_activeCommunity {
   __typename: "Community";
   id: string;
   title: string;
-  description: string | null;
+  description: string;
   avatarUrl: string | null;
-  tags: (string | null)[];
-  channels: (MyCommunities_activeCommunity_channels | null)[];
+  tags: (string | null)[] | null;
+  channels: (MyCommunities_activeCommunity_channels | null)[] | null;
 }
 
 export interface MyCommunities_activeChannel {
@@ -47,6 +47,6 @@ export interface MyCommunities_activeChannel {
 
 export interface MyCommunities {
   myCommunities: (MyCommunities_myCommunities | null)[];
-  activeCommunity: MyCommunities_activeCommunity;
-  activeChannel: MyCommunities_activeChannel;
+  activeCommunity: MyCommunities_activeCommunity | null;
+  activeChannel: MyCommunities_activeChannel | null;
 }

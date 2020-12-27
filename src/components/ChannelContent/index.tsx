@@ -1,6 +1,7 @@
 import { MyCommunities_myCommunities_channels } from '@sdk/api/Community/gqlTypes/MyCommunities';
 import React from 'react';
 import { ChannelType } from 'src/core/types/channel';
+import { ChatRoom } from './ChatRoom';
 
 type ChannelContentProps = {
   activeChannel: MyCommunities_myCommunities_channels;

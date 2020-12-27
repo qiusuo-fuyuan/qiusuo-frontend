@@ -17,8 +17,8 @@ export interface CommunityDetail {
   __typename: "Community";
   id: string;
   title: string;
-  description: string | null;
+  description: string;
   avatarUrl: string | null;
-  tags: (string | null)[];
-  channels: (CommunityDetail_channels | null)[];
+  tags: (string | null)[] | null;
+  channels: (CommunityDetail_channels | null)[] | null;
 }

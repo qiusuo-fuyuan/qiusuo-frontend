@@ -15,5 +15,5 @@ export interface Channels_channels {
 
 export interface Channels {
   __typename: "Community";
-  channels: (Channels_channels | null)[];
+  channels: (Channels_channels | null)[] | null;
 }

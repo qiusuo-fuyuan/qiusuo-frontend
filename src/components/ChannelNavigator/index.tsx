@@ -79,6 +79,7 @@ export const ChannelNavigator: React.FC<ChannelNavigatorProps> = (props: Channel
                   role="button"
                   key={entry.id}
                   tabIndex={index}
+                  data-channelid={entry.id}
                   onClick={updateActiveChannel}
                 > 
                   {entry.name}

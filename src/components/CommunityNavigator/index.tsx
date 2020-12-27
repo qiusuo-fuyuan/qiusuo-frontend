@@ -1,5 +1,6 @@
 import { useApolloClient } from '@apollo/client';
 import { MyCommunities, MyCommunities_activeCommunity } from '@sdk/api/Community/gqlTypes/MyCommunities';
+import { getMyCommunities } from '@sdk/api/Community/queries';
 import { OverlayContext, OverlayTheme, OverlayType } from 'AppComponents/Overlay';
 import classNames from 'classnames';
 import React, { useCallback, useEffect, useRef } from 'react';
@@ -47,17 +48,7 @@ export const CommunityNavigator: React.FC<CommunityNavigatorProps> = (props: Com
     */
     const queryResult =  await apolloClient.mutate<SetActiveCommunityMutation, SetActiveCommunityMutationVariables>({ mutation:setActiveCommunityMutation, 
       variables: setActiveCommunityArgument,
-      updateQueries: {
-        // updateQueries need to take the operation name 
-        MyCommunities: (previousResult: MyCommunities, { mutationResult }) => {
-          const newActiveCommunity = mutationResult.data.setActiveCommunity;
-          const allCommunities = {
-            activeCommunity: newActiveCommunity,
-            activeChannel: newActiveCommunity.channels[0]
-          };
-          return allCommunities;
-        }
-      } 
+      refetchQueries: [{ query: getMyCommunities }]
     });
     if( queryResult.errors) {
       // TODO: Handle error

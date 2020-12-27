@@ -19,10 +19,10 @@ export interface CreateCommunityMutation_createCommunity {
   __typename: "Community";
   id: string;
   title: string;
-  description: string | null;
+  description: string;
   avatarUrl: string | null;
-  tags: (string | null)[];
-  channels: (CreateCommunityMutation_createCommunity_channels | null)[];
+  tags: (string | null)[] | null;
+  channels: (CreateCommunityMutation_createCommunity_channels | null)[] | null;
 }
 
 export interface CreateCommunityMutation {
