@@ -11,16 +11,14 @@ export interface CommunityDetail_channels {
   __typename: "Channel";
   id: string;
   name: string;
-  active: boolean;
 }
 
 export interface CommunityDetail {
   __typename: "Community";
   id: string;
   title: string;
-  description: string | null;
+  description: string;
   avatarUrl: string | null;
-  tags: (string | null)[];
-  active: boolean;
-  channels: (CommunityDetail_channels | null)[];
+  tags: (string | null)[] | null;
+  channels: (CommunityDetail_channels | null)[] | null;
 }

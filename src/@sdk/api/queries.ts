@@ -3,6 +3,7 @@ import { ApolloQueryResult, ObservableQuery, useApolloClient } from '@apollo/cli
 import gql from 'graphql-tag';
 import { isEqual } from 'lodash';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { userDetailFragment } from './fragments/user';
 import { UserDetails } from './gqlTypes/UserDetails';
 import { useAuth } from './helper';
 
@@ -88,12 +89,10 @@ export function useUserDetails(): {data: UserDetails, error:any, loading: boolea
 export type QueryShape = (...args: any) => any;
 
 export const getUserDetails = gql`
+  ${userDetailFragment}
   query UserDetails {
     userDetails {
-      id
-      name
-      userId
-      avatarUrl
+      ...UserDetail
     }
   }
 `;

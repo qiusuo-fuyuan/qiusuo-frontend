@@ -9,7 +9,6 @@ export const communityDetailFragment = gql`
       description  
       avatarUrl
       tags
-      active
       ...Channels
     }
 `;

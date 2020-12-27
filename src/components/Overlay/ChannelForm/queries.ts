@@ -1,13 +1,13 @@
-import { communityDetailFragment } from '@sdk/api/fragments/community';
+import { channelDetailFragment } from '@sdk/api/fragments/channel';
 import gql from 'graphql-tag';
 
 
 
 export const createChannelMutation = gql`
-${communityDetailFragment}
+${channelDetailFragment}
 mutation CreateChannelMutation($createChannelInput: CreateChannelInput!) {
    addChannel(createChannelInput: $createChannelInput) { 
-     ...CommunityDetail
+     ...ChannelDetail
    }
 }
 `;

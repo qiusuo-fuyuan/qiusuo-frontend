@@ -11,10 +11,9 @@ export interface Channels_channels {
   __typename: "Channel";
   id: string;
   name: string;
-  active: boolean;
 }
 
 export interface Channels {
   __typename: "Community";
-  channels: (Channels_channels | null)[];
+  channels: (Channels_channels | null)[] | null;
 }

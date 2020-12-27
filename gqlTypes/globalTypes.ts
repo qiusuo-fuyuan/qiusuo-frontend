@@ -23,7 +23,7 @@ export interface CreateCommunityInput {
   userId: string;
   title: string;
   description: string;
-  tags: (string | null)[];
+  tags?: (string | null)[] | null;
   avatarUrl?: string | null;
 }
 

@@ -1,6 +1,7 @@
 import { ApolloQueryResult, gql, ObservableQuery, useApolloClient } from '@apollo/client';
 import { isEqual } from 'lodash';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { channelDetailFragment } from '../fragments/channel';
 import { communityDetailFragment } from '../fragments/community';
 import { MyCommunities } from './gqlTypes/MyCommunities';
 
@@ -36,7 +37,7 @@ export function useMyCommunities(): {data: MyCommunities, error:any, loading: bo
       const observable: ObservableQuery<
       MyCommunities,
       { [key: string]: any }
-    > = client.watchQuery<MyCommunities>({ query: getMyCommunities });
+    > = client.watchQuery<MyCommunities>({ query: getMyCommunities, fetchPolicy: 'cache-first' });
       const subscription = observable.subscribe(
         (queryResult: ApolloQueryResult<MyCommunities>) => {
           const { data, errors: apolloErrors } = queryResult;
@@ -76,9 +77,16 @@ export function useMyCommunities(): {data: MyCommunities, error:any, loading: bo
 
 export const getMyCommunities = gql`
   ${communityDetailFragment}
+  ${channelDetailFragment}
   query MyCommunities {
     myCommunities {
       ...CommunityDetail
+    }
+    activeCommunity {
+      ...CommunityDetail
+    }
+    activeChannel {
+      ...ChannelDetail
     }
   }
 `;

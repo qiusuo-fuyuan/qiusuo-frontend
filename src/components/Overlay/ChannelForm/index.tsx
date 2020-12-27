@@ -49,13 +49,14 @@ export const ChannelForm: React.FC<{ overlay: OverlayContextInterface }> = (
     };
 
    /*
-   I need to add one update function here.
+   After add the new channel, we need to set the new channel as the current active channel
+   (1)Fetch the query from backend. This is not performant
+   (2)Update Cache manually
+      we can update the reference directly
    */
   const queryResult =  await apolloClient.mutate<CreateChannelMutation, CreateChannelMutationVariables>({ mutation:createChannelMutation, 
     variables: createChannelArgument,
-    refetchQueries: ( result ) => {
-      return [{ query: getMyCommunities, variables: { userId: user.userDetails.userId } }];
-    }
+    refetchQueries: [{ query: getMyCommunities }]
   });
  if( queryResult.errors) {
    // TODO: Handle error
